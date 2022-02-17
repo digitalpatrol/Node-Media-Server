@@ -85,7 +85,7 @@ class NodeRelayServer {
     }
   }
 
-  //从远端拉推到本地
+  //Dynamically pull a stream from remote to local when play event received
   onRelayPull(url, app, name) {
     let conf = {}
     conf.app = app
@@ -110,7 +110,7 @@ class NodeRelayServer {
     return id
   }
 
-  //从本地拉推到远端
+  //Dynamically push a stream from local to remote when publish event received
   onRelayPush(url, app, name) {
     let conf = {}
     conf.app = app
