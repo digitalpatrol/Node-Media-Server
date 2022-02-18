@@ -94,18 +94,18 @@ class NodeTransSession extends EventEmitter {
     ])
     argv = argv.filter((n) => {
       return n
-    }) //去空
+    }) // empty
     this.ffmpeg_exec = spawn(this.conf.ffmpeg, argv)
     this.ffmpeg_exec.on("error", (e) => {
       Logger.ffdebug(e)
     })
 
     this.ffmpeg_exec.stdout.on("data", (data) => {
-      Logger.ffdebug(`FF输出：${data}`)
+      Logger.ffdebug(`FFmpeg:${data}`)
     })
 
     this.ffmpeg_exec.stderr.on("data", (data) => {
-      Logger.ffdebug(`FF输出：${data}`)
+      Logger.ffdebug(`FFmpeg:${data}`)
     })
 
     this.ffmpeg_exec.on("close", (code) => {
