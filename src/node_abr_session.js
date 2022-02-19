@@ -54,7 +54,7 @@ class NodeAbrSession extends EventEmitter {
       // Create filter
       let filter = [
         `-filter:v:${index}`,
-        `scale=w='min(${variant.width},iw)':h='min(${variant.height},ih)':force_original_aspect_ratio=decrease`,
+        `scale=w='min(${variant.width},iw)':h='min(${variant.height},ih)':force_original_aspect_ratio=decrease:force_divisible_by=2`,
         `-maxrate:v:${index}`,
         maxRate,
         `-bufsize:v:${index}`,
