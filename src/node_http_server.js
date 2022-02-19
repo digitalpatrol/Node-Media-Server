@@ -70,7 +70,7 @@ class NodeHttpServer {
     }
 
     app.use(Express.static(path.join(__dirname + "/public")))
-    app.use(Express.static(this.mediaroot))
+
     if (config.http.webroot) {
       app.use(Express.static(config.http.webroot))
     }

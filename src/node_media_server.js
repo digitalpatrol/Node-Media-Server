@@ -9,6 +9,7 @@ const Logger = require("./node_core_logger")
 const NodeRtmpServer = require("./node_rtmp_server")
 const NodeHttpServer = require("./node_http_server")
 const NodeTransServer = require("./node_trans_server")
+const NodeAbrServer = require("./node_abr_server")
 const NodeRelayServer = require("./node_relay_server")
 const NodeFissionServer = require("./node_fission_server")
 const context = require("./node_core_ctx")
@@ -37,6 +38,15 @@ class NodeMediaServer {
         Logger.log("NodeTransServer does not work in cluster mode")
       } else {
         this.nts = new NodeTransServer(this.config)
+        this.nts.run()
+      }
+    }
+
+    if (this.config.abr) {
+      if (this.config.cluster) {
+        Logger.log("NodeAbrServer does not work in cluster mode")
+      } else {
+        this.nts = new NodeAbrServer(this.config)
         this.nts.run()
       }
     }
