@@ -8,7 +8,7 @@ const LOG_TYPES = {
   FFDEBUG: 4,
 }
 
-let logType = LOG_TYPES.NORMAL
+let logType = LOG_TYPES.FFDEBUG
 
 const setLogType = (type) => {
   if (typeof type !== "number") return

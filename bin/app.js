@@ -74,6 +74,7 @@ const config = {
     ffmpeg: "/usr/bin/ffmpeg",
     tasks: [
       {
+        cleanupTime: 60,
         app: "live",
         vc: "libx264",
         vcParam: ["-crf", "23"],

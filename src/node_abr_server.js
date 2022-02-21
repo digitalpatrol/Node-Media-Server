@@ -49,9 +49,14 @@ class NodeAbrServer {
     }
 
     let version = await getFFmpegVersion(this.config.abr.ffmpeg)
-    if (version === "" || parseInt(version.split(".")[0]) < 4) {
+    if (
+      version === "" ||
+      parseInt(version.split(".")[0]) < 4 ||
+      (parseInt(version.split(".")[0]) == 4 &&
+        parseInt(version.split(".")[1]) < 3)
+    ) {
       Logger.error(
-        "Node Media Abr Server startup failed. ffmpeg requires version 4.0.0 above"
+        "Node Media Abr Server startup failed. ffmpeg requires version 4.3.0 above"
       )
       Logger.error("Download the latest ffmpeg static program:", getFFmpegUrl())
       return
@@ -109,8 +114,10 @@ class NodeAbrServer {
 
         // add delayed cleanup of encoding files
         session.on("end", async () => {
+          let cleanupTime = conf.cleanupTime || 60
+
           this.abrSessions.delete(id)
-          await new Promise((r) => setTimeout(r, 16 * 1000))
+          await new Promise((r) => setTimeout(r, cleanupTime * 1000))
           let symLoc = fs.readlinkSync(wwwPath)
 
           if (symLoc === ouPath) {
